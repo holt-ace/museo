@@ -31,4 +31,18 @@ class Curator
       photo.artist_id == artist.id
     end
   end
+
+  def artists_with_multiple_photographs
+    #trying to find a way to retrieve duplicate artist_ids in photographs
+    #and compare that to the artist.id
+    duplicates = []
+    @photographs.each_with_index do |photo, index|
+      if photo.artist_id == photo.artist_id
+        duplicates << photo.artist_id
+      end
+    end
+    @artists.find do |artist|
+      [artist.id] == duplicates
+    end
+  end
 end
